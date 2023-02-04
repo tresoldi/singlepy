@@ -1,4 +1,4 @@
-#!/usr/env/bin python
+#!/usr/bin/env python3
 
 """
 Building script for the projects of `singlepy`.
@@ -84,6 +84,20 @@ def build_unicode2ascii():
         output_file.write(source)
 
 
+def build_database():
+    """
+    Build the `database` project.
+    """
+
+    # Build all string replacements
+    replacements = {}
+
+    # Read the template file, perform the replacements, and write back to disk
+    source = fill_template(ROOT_PATH / "templates" / "database.py", replacements)
+    with open(ROOT_PATH / "projects" / "database.py", "w") as output_file:
+        output_file.write(source)
+
+
 def main():
     """
     Script entry point.
@@ -91,6 +105,9 @@ def main():
 
     # Build the `unicode2ascii` project.
     build_unicode2ascii()
+
+    # Build the `database` project.
+    build_database()
 
     # TODO: run black (and isort?) on the output files
 
